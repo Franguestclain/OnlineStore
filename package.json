@@ -1,0 +1,36 @@
+{
+  "name": "tienda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Franguestclain/OnlineStore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Franguestclain/OnlineStore/issues"
+  },
+  "homepage": "https://github.com/Franguestclain/OnlineStore#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^5.0.0",
+    "config": "^3.2.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.5",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
