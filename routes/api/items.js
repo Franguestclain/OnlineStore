@@ -19,14 +19,25 @@ const upload = multer({ storage });
 
 
 // @route   GET api/items
-// @desc    Get All items
+// @desc    Obtener todos los items ordenados alfabeticamente
 // @access  Public
 router.get('/', (req, res) => {
     Item.find()
-    .sort({nombre: -1})
+    .sort({nombre: 1})
     .then(item => {
         res.send(item);
-        console.log(item);
+    });
+});
+
+
+// @route   GET api/items
+// @desc    Get todos los items ordenados por los mas recientes
+// @access  Public
+router.get('/recent', (req, res) => {
+    Item.find()
+    .sort({fecha: -1})
+    .then(item => {
+        res.send(item);
     });
 });
 
@@ -42,7 +53,9 @@ router.get('/:id', (req, res) => {
 // @route   POST api/items
 // @desc    POST an item
 // @access  Private
-router.post('/', auth, upload.any(), (req, res) => {
+router.post('/', upload.any(), (req, res) => {
+    // TODO:
+    // Hacer algo en caso de que las imagenes ya esten arriba
     let imagenes = req.files.map( item => ({
             path: item.path,
             originalName: item.originalname

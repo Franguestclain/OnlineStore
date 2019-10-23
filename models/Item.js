@@ -34,7 +34,11 @@ const ItemSchema = new Schema({
             type: Number
         }
     },
-    imagenes: [imageSchema]
+    imagenes: [imageSchema],
+    fecha: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 
