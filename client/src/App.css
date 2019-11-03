@@ -1,0 +1,86 @@
+body{
+    background: #f9f9f9;
+}
+
+/* 
+############################33
+        HEADER
+############################33
+*/
+.header__nav__container{
+    border-bottom: 2px solid rgba(33,37,41,.8);
+}
+.anchor__header a{
+    text-decoration: none;
+    color: #212529;
+}
+
+.logo a {
+    font-size: 1.55rem;
+}
+
+.access__buttons__header{
+    color: #212529;
+    text-decoration: none !important;
+}
+
+.access__buttons__header:hover{
+    color: #595a5a;
+    text-decoration: none;
+}
+
+.card__height{
+    height: 425px;
+    overflow: hidden;
+}
+
+.card__img--recientes{
+    width: 100%;
+}
+
+.card__body--recientes{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.producto__img__preview{
+    width: 100%;
+}
+
+
+/* 
+#################################
+        PRODUCTO
+#################################
+*/
+
+.item__nombre{
+    font-size: 5rem;
+    font-family: sans-serif;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+
+.item__descripcion{
+    font-size: 1.75rem;
+    font-family: sans-serif;
+    margin-bottom: 2rem;
+}
+
+.item__precio{
+    font-size: 2.75rem;
+    font-family: sans-serif;
+}
+
+.boton__comprar{
+    font-size: 1.5rem;
+}
+
+.boton__favoritos .icono--selected{
+    color: #FF3838;
+}
+
+.boton__favoritos .icono{
+    color: #a39292;
+}

@@ -6,16 +6,18 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../../models/Usuario');
 
-// @route   POST api/usuarios
-// @desc    PRegistrar un nuevo usuario
+// @route   POST api/usuarios/
+// @desc    Registrar un nuevo usuario
 // @access  Public
 router.post('/', (req, res) => {
-    const {nombre, email, password} = req.body;
+    const {nombre, email, password, password2} = req.body;
 
     // Validacion simple
-    if(!nombre || !email || !password){
+    if(!nombre || !email || !password || !password2){
         return res.status(400).json({msg: "Por favor introduzca todos los campos"});
     }
+
+    if(password !== password2) return res.status(400).json({msg: "Las contraseñas no coinciden"});
 
     User.findOne({email})
         .then(user => {
@@ -34,22 +36,29 @@ router.post('/', (req, res) => {
                     newUser.password = hash;
                     newUser.save()
                         .then(user=>{
-                            jwt.sign(
-                                { id: user.id },
-                                config.get('jwtSecret'),
-                                { expiresIn: 3600 },
-                                (err, token) => {
-                                    if(err) throw err;
-                                    res.json({
-                                        token,
-                                        user: {
-                                            id: user.id,
-                                            nombre: user.nombre,
-                                            email: user.email
-                                        }
-                                    });       
-                                }
-                            );
+                            if(user.admin){
+                                jwt.sign(
+                                    { id: user.id },
+                                    config.get('jwtSecret'),
+                                    { expiresIn: 3600 },
+                                    (err, token) => {
+                                        if(err) throw err;
+                                        res.json({
+                                            token,
+                                            user: {
+                                                id: user.id,
+                                                nombre: user.nombre,
+                                                email: user.email
+                                            }
+                                        });       
+                                    }
+                                );
+                            }else{
+                                //Mandamos el token vacio porque no es administrador
+                                res.json({
+                                    user
+                                });
+                            }
                         });
                 });
             });

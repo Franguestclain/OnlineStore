@@ -5,7 +5,7 @@ function auth(req, res, next) {
     const token = req.header('x-auth-token');
 
     // Checar el token
-    if(!token) res.status(401).json({msg: 'No token, autorizacion denegada'});
+    if(!token) return res.status(401).json({msg: 'No existe token de administrador'});
 
     try{
         // Verificar token
@@ -15,7 +15,7 @@ function auth(req, res, next) {
         req.user = decoded;
         next();   
     }catch(e){
-        res.status(400).json({msg: `Token no es valido`});
+        return res.status(400).json({msg: `Token no es valido`});
     }
 }
 

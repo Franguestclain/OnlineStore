@@ -17,7 +17,7 @@ export default function(state = initialState, action){
         case GET_ITEMS_BY_ID:
             return {
                 ...state,
-                items: state.items.filter(item => item._id === action.payload._id)
+                items: state.items.filter(item => item._id === action.payload._id)[0]
             };
         case DELETE_ITEMS:
             return {

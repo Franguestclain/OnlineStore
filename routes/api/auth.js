@@ -27,22 +27,34 @@ router.post('/', (req, res) => {
                 .then(isMatch => {
                     if(!isMatch) return res.status(400).json({msg: "Credenciales incorrectas"});
 
-                    jwt.sign(
-                        { id: user.id },
-                        config.get('jwtSecret'),
-                        { expiresIn: 3600 },
-                        (err, token) => {
-                            if(err) throw err;
-                            res.json({
-                                token,
-                                user: {
-                                    id: user.id,
-                                    nombre: user.nombre,
-                                    email: user.email
-                                }
-                            });       
-                        }
-                    );
+                    if(user.admin){
+                        jwt.sign(
+                            { id: user.id },
+                            config.get('jwtSecret'),
+                            { expiresIn: 3600 },
+                            (err, token) => {
+                                //Error
+                                if(err) throw err;
+                                res.json({
+                                    token,
+                                    user: {
+                                        id: user.id,
+                                        admin: user.admin,
+                                        nombre: user.nombre,
+                                        email: user.email
+                                    }
+                                });
+                            }
+                        );
+                    }else{
+                        res.json({
+                            user: {
+                                id: user.id,
+                                nombre: user.nombre,
+                                email: user.email
+                            }
+                        });
+                    }
 
                 });
         });

@@ -6,6 +6,7 @@ import {Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, NavLi
 import {Link} from 'react-router-dom';
 
 class Recientes extends Component {
+
     static propTypes = {
         getRecientes: PropTypes.func.isRequired,
         item: PropTypes.object.isRequired
@@ -19,17 +20,23 @@ class Recientes extends Component {
         const {items} = this.props.item;
         return (
             <Container>
-                <h3>Recientemente agregado: </h3>
+                <h3 className="mb-5">Recientemente agregado:</h3>
                 <Row>
                     {
                         items.map( item => (
-                            <Col>
-                                <Card>
+                            <Col sm="12" md="3" className="mb-5">
+                                <Card className="card__height card__height--recientes">
                                     {/* TODO: Arreglar la ruta para las imagenes */}
-                                    <CardImg top width="100%" src= {`../../../${item.imagenes[0].path}`}></CardImg>
-                                    <CardBody>
+                                    <Link to={{
+                                            pathname: `/producto/${item._id}`,
+                                            state: {id: item._id}   
+                                        }}><CardImg className="card__img card__img--recientes" top src= {`../../../${item.imagenes[0].path}`}></CardImg></Link>
+                                    <CardBody className="cardbody__layout cardbody__layout--recientes">
                                         <CardTitle>
-                                            <Link to={`/producto/${item._id}`}><NavLink>{item.nombre}</NavLink></Link>
+                                            <NavLink><Link to={{
+                                                pathname: `/producto/${item._id}`,
+                                                state: {id: item._id}
+                                            }}>{item.nombre}</Link></NavLink>
                                         </CardTitle>
                                         <CardText>{item.descripcion}</CardText>
                                         <Button>Comprar</Button>
