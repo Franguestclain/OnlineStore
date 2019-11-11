@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {NavItem, Dropdown, DropdownItem, DropdownToggle, DropdownMenu} from 'reactstrap';
+import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import {logout} from '../actions/userActions';
@@ -33,7 +34,9 @@ const UserOptions = (props) =>{
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem>Perfil</DropdownItem>
-                    <DropdownItem>Historial de compras</DropdownItem>
+                    {
+                        (user.admin) ? <DropdownItem><Link to={{pathname: '/inventario'}}>Inventario</Link></DropdownItem> : <DropdownItem>Historial de compras</DropdownItem>
+                    }
                     <DropdownItem divider />
                     <DropdownItem onClick={logout}>Cerrar sesión</DropdownItem>
                 </DropdownMenu>

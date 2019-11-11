@@ -53,7 +53,7 @@ router.get('/:id', (req, res) => {
 // @route   POST api/items
 // @desc    POST an item
 // @access  Private
-router.post('/', upload.any(), (req, res) => {
+router.post('/',auth,upload.any(), (req, res) => {
     // TODO:
     // Hacer algo en caso de que las imagenes ya esten arriba
     let imagenes = req.files.map( item => ({

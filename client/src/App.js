@@ -11,6 +11,7 @@ import Productos from './components/Productos';
 import Categorias from './components/Categorias';
 import Home from './components/Home';
 import Producto from './components/Producto';
+import Inventario from './components/Inventario';
 
 import { Provider } from 'react-redux';
 import configureStore, { history } from './store';
@@ -39,6 +40,7 @@ class App extends Component {
             <Route path="/productos" component={Productos} />
             <Route path="/categorias" component={Categorias} />
             <Route path="/producto/:id" component={Producto} />
+            <Route path="/inventario" component={Inventario} />
           </Switch>
         </ConnectedRouter>
       </Provider>
